@@ -23,10 +23,12 @@ public class Main {
         }
         
         // A와 B 찾기: coefA[D] * A + coefB[D] * B = K
-        for (int A = K; A >= 1; A--) {
-            if ((K - coefA[D] * A) % coefB[D] == 0) {
+        for (int A = 1; A <= K; A++) {
+            // 정수인지 확인 후 B에 입력
+        	if ((K - coefA[D] * A) % coefB[D] == 0) {
                 int B = (K - coefA[D] * A) / coefB[D];
-                if (B > A) {
+                // 제약조건 확인(1≤ A ≤ B)
+                if (B >= A) {
                     System.out.println(A);
                     System.out.println(B);
                     break;
