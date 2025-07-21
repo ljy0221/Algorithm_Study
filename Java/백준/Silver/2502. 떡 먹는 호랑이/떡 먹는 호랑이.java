@@ -23,6 +23,7 @@ public class Main {
         }
         
         // A와 B 찾기: coefA[D] * A + coefB[D] * B = K
+        // 여러개일경우 아무거나 한개만 출력하면 되서 1부터 시작해서 증가, K부터 시작해서 감소 상관 없음
         for (int A = 1; A <= K; A++) {
             // 정수인지 확인 후 B에 입력
         	if ((K - coefA[D] * A) % coefB[D] == 0) {
