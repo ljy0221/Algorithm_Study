@@ -1,8 +1,6 @@
 import java.util.*;
 import java.io.*;
 
-
-
 public class Main {
 	/*
 	 * 입력: N-세로크기, M-가로크기
@@ -104,7 +102,7 @@ public class Main {
 			}
 		}
 		
-		int result = kruskal();
+		int result = prim();
 		System.out.println(result);
 	}
 	
@@ -246,5 +244,43 @@ public class Main {
 	    // 5. 모든 섬이 연결되었는지 확인
 	    return edgeCount == islandNum - 2 ? totalCost : -1;
 	}
-
+	public static int prim() {
+	    boolean[] inMST = new boolean[islandNum];
+	    int[] minCost = new int[islandNum];
+	    Arrays.fill(minCost, Integer.MAX_VALUE);
+	    
+	    // 1번 섬부터 시작
+	    minCost[1] = 0;
+	    int totalCost = 0;
+	    int edgeCount = 0;
+	    
+	    for(int i = 0; i < islandNum - 1; i++) {  // 0번은 안 씀
+	        // 최소 비용 정점 찾기
+	        int minVertex = -1;
+	        int minWeight = Integer.MAX_VALUE;
+	        
+	        for(int v = 1; v < islandNum; v++) {
+	            if(!inMST[v] && minCost[v] < minWeight) {
+	                minWeight = minCost[v];
+	                minVertex = v;
+	            }
+	        }
+	        
+	        if(minVertex == -1) return -1;  // 연결 불가능
+	        
+	        // MST에 추가
+	        inMST[minVertex] = true;
+	        totalCost += minWeight;
+	        edgeCount++;
+	        
+	        // 인접 정점들의 최소 비용 갱신
+	        for(int next = 1; next < islandNum; next++) {
+	            if(!inMST[next] && bridges[minVertex][next] != Integer.MAX_VALUE) {
+	                minCost[next] = Math.min(minCost[next], bridges[minVertex][next]);
+	            }
+	        }
+	    }
+	    
+	    return edgeCount == islandNum - 1 ? totalCost : -1;  // 실제 섬 개수는 islandNum-1
+	}
 }
