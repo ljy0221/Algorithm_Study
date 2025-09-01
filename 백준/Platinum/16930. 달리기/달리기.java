@@ -66,7 +66,7 @@ public class Main {
                         visited[nr][nc] = currentTime + 1;
                     }
                     // 방문한 길인데 현재 경로가 더 길거나 같다면 계속 탐색
-                    else if (visited[nr][nc] >= currentTime + 1) {
+                    else if (visited[nr][nc] == currentTime + 1) {
                         continue; // 이 칸은 건너뛰고 다음 칸 탐색
                     }
                     // 방문한 길인데 현재 경로가 더 짧다면 그 방향 중단
