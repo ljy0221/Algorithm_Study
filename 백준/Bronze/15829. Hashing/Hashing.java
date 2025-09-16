@@ -16,12 +16,13 @@ public class Main {
         in = br.readLine();
 
         long hash = 0;
+        long multiplier = 1;
 
         for (int i = 0; i < L; i++) {
             int current = in.charAt(i)-'a'+1;
-            long multiplier = (long)Math.pow(r, i);
 
-            hash += current*multiplier;
+            hash = (hash+(current*multiplier)%M)%M;
+            multiplier = (multiplier*r)%M;
         }
 
         System.out.println(hash);
